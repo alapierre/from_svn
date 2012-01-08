@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>pl.com.softproject.utils</groupId>
+    <artifactId>java-common-utilities</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.2-SNAPSHOT</version>
+    <name>java-common-utilities</name>
+    <organization>
+        <name>SoftProject</name>
+    </organization>
+    <developers>
+        <developer>
+            <name>Adrian Lapierre</name>
+            <email>alapierre@soft-project.pl</email>
+        </developer>
+    </developers>
+    <url>http://kenai.com/projects/java-commons-utils/</url>
+    <scm>
+        <connection>scm:svn:https://svn.kenai.com/svn/java-commons-utils~source</connection>
+    </scm>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagBase>https://svn.kenai.com/svn/java-commons-utils~source/tags/</tagBase>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.7</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.9</version>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <charset>utf-8</charset>
+                    <minmemory>128m</minmemory>
+                    <maxmemory>512</maxmemory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+
+    <modules>
+        <module>utils-hibernate</module>
+        <module>utils-xml</module>
+        <module>utils-text</module>
+        <module>utils-jdbc</module>
+    <module>excel-exporter</module>
+  </modules>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>csartifactory</id>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-releases</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+        <repository>
+            <id>csartifactory-snapshots</id>
+            <name>artifactory server</name>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>csartifactory</id>
+            <name>artifactory server</name>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>csdeploy</id>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-releases-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>cssnapshot</id>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-snapshots-local</url>
+        </snapshotRepository>
+        <site>
+            <id>cssitedeploy</id>
+            <url>scp://maven.pl.chartsearch.net/export/home0/maven/sites/chartsource-masterpom</url>
+        </site>
+    </distributionManagement>
+
+    <!-- distributionManagement>
+		<repository>
+			<id>deploy</id>
+			<url>scp://maven.pl.chartsearch.net/export/home0/maven/repository</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshot</id>
+			<url>scp://maven.pl.chartsearch.net/export/home0/maven/repository</url>
+		</snapshotRepository>
+		<site>
+			<id>deploy</id>
+			<url>scp://maven.pl.chartsearch.net/export/home0/maven/sites/softproject</url>
+		</site>
+    </distributionManagement-->
+
+</project>

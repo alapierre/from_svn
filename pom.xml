@@ -15,9 +15,9 @@
             <email>alapierre@soft-project.pl</email>
         </developer>
     </developers>
-    <url>http://kenai.com/projects/java-commons-utils/</url>
+    <url>http://xp-dev.com/svn/java-commons-util</url>
     <scm>
-        <connection>scm:svn:https://svn.kenai.com/svn/java-commons-utils~source</connection>
+        <connection>scm:svn:http://xp-dev.com/svn/java-commons-util</connection>
     </scm>
 
 
@@ -26,7 +26,7 @@
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
-                    <tagBase>https://svn.kenai.com/svn/java-commons-utils~source/tags/</tagBase>
+                    <tagBase>http://xp-dev.com/svn/java-commons-util/tags/</tagBase>
                 </configuration>
             </plugin>
             <plugin>

@@ -78,7 +78,7 @@
     <module>excel-exporter</module>
   </modules>
 
-    <pluginRepositories>
+    <!--pluginRepositories>
         <pluginRepository>
             <id>csartifactory</id>
             <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-releases</url>
@@ -115,21 +115,6 @@
             <id>cssitedeploy</id>
             <url>scp://maven.pl.chartsearch.net/export/home0/maven/sites/chartsource-masterpom</url>
         </site>
-    </distributionManagement>
-
-    <!-- distributionManagement>
-		<repository>
-			<id>deploy</id>
-			<url>scp://maven.pl.chartsearch.net/export/home0/maven/repository</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshot</id>
-			<url>scp://maven.pl.chartsearch.net/export/home0/maven/repository</url>
-		</snapshotRepository>
-		<site>
-			<id>deploy</id>
-			<url>scp://maven.pl.chartsearch.net/export/home0/maven/sites/softproject</url>
-		</site>
     </distributionManagement-->
 
 </project>

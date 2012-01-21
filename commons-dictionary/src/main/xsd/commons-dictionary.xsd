@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author Adrian Lapierre-Mróz (www.soft-project.pl) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dict="http://www.softproject.com.pl/commons-dictionary" targetNamespace="http://www.softproject.com.pl/commons-dictionary">
+	<xs:element name="dictionarys">
+		<xs:annotation>
+			<xs:documentation>slowniki</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="dictionary" type="dict:dictionaryType" maxOccurs="unbounded">
+					<xs:unique name="entry-key-unique">
+						<xs:selector xpath="./entry"/>
+						<xs:field xpath="@key"/>
+					</xs:unique>
+					<xs:keyref name="entry-parent-key-id" refer="dict:entry-key-unique">
+						<xs:selector xpath="./entry"/>
+						<xs:field xpath="@parent-key"/>
+					</xs:keyref>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="dictionary-unique-name">
+			<xs:selector xpath="./dictionary"/>
+			<xs:field xpath="@name"/>
+		</xs:unique>
+	</xs:element>
+	<xs:complexType name="dictionaryType">
+		<xs:sequence>
+			<xs:element name="entry" type="dict:entryType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="last-updated" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="entryType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="key" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>primary key unique in dictionary level</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="parent-key" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>reference to primary key on idem dictionary level</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="key-substitute" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>if set, this value should by use instead of key in destination storage</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

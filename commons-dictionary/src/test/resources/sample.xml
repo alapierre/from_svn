@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dict:dictionarys xmlns:dict="http://www.softproject.com.pl/commons-dictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.softproject.com.pl/commons-dictionary http://schema.softproject.com.pl/commons-dictionary/commons-dictionary.xsd">
+	<dictionary name="Słownik">
+		<entry key="klucz">wartość</entry>
+		<entry key="klucz2">wartość2</entry>
+		<entry key="sub.klucz" parent-key="klucz2">wwww</entry>
+	</dictionary>
+	<dictionary name="Słownik2">
+		<entry key="klucz2">ddd</entry>
+		<entry key="klucz3">ddd</entry>
+		<entry key="klucz4">ddd</entry>
+	</dictionary>
+</dict:dictionarys>

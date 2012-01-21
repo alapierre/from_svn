@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:dictionarys xmlns:ns2="http://www.softproject.com.pl/commons-dictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.softproject.com.pl/commons-dictionary http://schema.softproject.com.pl/commons-dictionary/commons-dictionary.xsd">
+    <dictionary name="anteny-producenci">
+        <entry key="anglia">Anglia</entry>
+        <entry key="canada">Canada</entry>
+        <entry key="francja">Francja</entry>
+        <entry key="grecja">Grecja</entry>
+        <entry key="ireland">Ireland</entry>
+        <entry key="irlandia">Irlandia</entry>
+        <entry key="izrael">IZRAEL</entry>
+        <entry key="kanada">Kanada</entry>
+        <entry key="m/a_com">M/A COM</entry>
+        <entry key="niemcy">Niemcy</entry>
+        <entry key="norwegia">Norwegia</entry>
+        <entry key="polska">Polska</entry>
+        <entry key="szwajcaria">Szwajcaria</entry>
+        <entry key="szwecja">Szwecja</entry>
+        <entry key="taiwan">TAIWAN</entry>
+        <entry key="usa">USA</entry>
+        <entry key="wielka_brytania">Wielka Brytania</entry>
+        <entry key="wlochy">Włochy</entry>
+        <entry key="bd">Brak Danych</entry>
+        
+        <entry parent-key="taiwan" key="adt">Advance Data Technology, LTD.</entry>
+        <entry parent-key="wielka_brytania" key="airspan">Airspan Communications Ltd</entry>
+        <entry parent-key="usa" key="allen_telecom_inc_usa">ALLEN TELECOM INC, USA</entry>
+        <entry parent-key="ireland" key="alpha_wireless_ltd"/>
+        <entry parent-key="izrael" key="alvarion">Alvarion Ltd</entry>
+        <entry parent-key="usa" key="andrev">Andrev Corporation</entry>
+        <entry parent-key="usa" key="andrew">Andrew Corporation</entry>
+        <entry parent-key="usa" key="aperto">Aperto Networks</entry>
+        <entry parent-key="usa" key="aperto_networks">Aperto Networks - USA</entry>
+        <entry parent-key="usa" key="axxcelera">Axxcelera</entry>
+        <entry parent-key="polska" key="bestpartner_polska">BESTPARTNER POLSKA</entry>
+        <entry parent-key="niemcy" key="bosch_35_-_bs_60_-_v">Bosch 3,5 - BS 60 - V</entry>
+        <entry parent-key="wielka_brytania" key="cambridge">Cambridge Broadband Ltd.</entry>
+        <entry parent-key="wielka_brytania" key="cambridge_broadband_networks">Cambridge Broadband Networks Ltd.</entry>
+        <entry parent-key="szwecja" key="comhat">Comhat AB</entry>
+        <entry parent-key="usa" key="commscope_inc_usa">COMMSCOPE INC., USA</entry>
+        <entry parent-key="bd" key="decibel_products">DECIBEL PRODUCTS</entry>
+        <entry parent-key="polska" key="elboxrf_polska">ELBOXRF, Polska</entry>
+        <entry parent-key="bd" key="ems_wireless">EMS WIRELESS</entry>
+        <entry parent-key="szwecja" key="ericsson">Ericsson</entry>
+        <entry parent-key="wielka_brytania" key="european">European Antennas</entry>
+        <entry parent-key="wlochy" key="flower_wireless_systems">Flower Wireless Systems</entry>
+        <entry parent-key="polska" key="horizon">Horizon</entry>
+        <entry parent-key="szwajcaria" key="hubert+suhner">Hubert+Suhner AG</entry>
+        <entry parent-key="usa" key="hughes">Hughes Nework System Inc.</entry>
+        <entry parent-key="izrael" key="innowave_eci_wireless">InnoWave ECI Wireless</entry>
+        <entry parent-key="niemcy" key="kathrein">KATHREIN-Werke KG</entry>
+        <entry parent-key="usa" key="lucent">Lucent Technologies USA</entry>
+        <entry parent-key="niemcy" key="marconi">Marconi DMS RBS 26/2 90-V</entry>
+        <entry parent-key="niemcy" key="marconi_-__niemcy">MARCONI</entry>
+        <entry parent-key="izrael" key="mars_ant">Mars Antennas&amp; RF Systems Ltd,</entry>
+        <entry parent-key="francja" key="mat_equipment">MAT Equipment</entry>
+        <entry parent-key="bd" key="micro_wave">micro Wave</entry>
+        <entry parent-key="usa" key="motorola">MOTOROLA</entry>
+        <entry parent-key="izrael" key="mti">MTI</entry>
+        <entry parent-key="norwegia" key="nera_networks_as">NERA NETWORKS AS.</entry>
+        <entry parent-key="wielka_brytania" key="nextnet">NextNet</entry>
+        <entry parent-key="wielka_brytania" key="nortel">NORTEL NETWORKS</entry>
+        <entry parent-key="anglia" key="nortel_telecom_anglia">Nortel Telecom, Anglia</entry>
+        <entry parent-key="bd" key="or_antena">OR ANTENA</entry>
+        <entry parent-key="usa" key="pctel">PCTEL</entry>
+        <entry parent-key="usa" key="proxim">Proxim</entry>
+        <entry parent-key="usa" key="pwa_5800d-90">Radiowave</entry>
+        <entry parent-key="wielka_brytania" key="radial">Radial</entry>
+        <entry parent-key="usa" key="radiowave">Radiowave</entry>
+        <entry parent-key="canada" key="redline_communication_canada">RedLine Communication, Canada</entry>
+        <entry parent-key="usa" key="rfs">Radio Frequency System</entry>
+        <entry parent-key="bd" key="rohs_compliannce">RoHS Compliannce</entry>
+        <entry parent-key="bd" key="rymsa">RYMSA</entry>
+        <entry parent-key="wlochy" key="sira_sistemi_radio">SIRA SISTEMI RADIO</entry>
+        <entry parent-key="irlandia" key="stella">Stella Doradus Ireland LTD</entry>
+        <entry parent-key="izrael" key="tadiran">TADIRAN Telecommunications Ltd</entry>
+        <entry parent-key="kanada" key="til-tek_kanada">TIL-TEK Kanada</entry>
+        <entry parent-key="usa" key="tranzeo_wireless_technologies">TRANZEO Wireless Technologies</entry>
+        <entry parent-key="usa" key="ubiquiti_networks_inc">Ubiquiti Networks, Inc.</entry>
+        <entry parent-key="polska" key="wasko_sa">WASKO S.A.</entry>
+        <entry parent-key="grecja" key="wibas">Wibas</entry>
+    </dictionary>
+</ns2:dictionarys>

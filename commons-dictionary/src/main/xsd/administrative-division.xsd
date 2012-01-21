@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Adrian (SoftProject) -->
+<!-- author Adrian Lapierre-Mróz (www.soft-project.pl) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.softproject.com.pl/commons-administrative-division" targetNamespace="http://www.softproject.com.pl/commons-administrative-division">
+	<xs:element name="administrative-division">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="province" type="ns1:Province" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="last-updated" type="xs:dateTime" default="2011-12-01T00:00:00"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="CommunityType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="powiat-grodzki"/>
+			<xs:enumeration value="miejska"/>
+			<xs:enumeration value="wiejska"/>
+			<xs:enumeration value="miejsko-wiejska"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Province">
+		<xs:sequence>
+			<xs:element name="district" type="ns1:District" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="District">
+		<xs:sequence>
+			<xs:element name="community" type="ns1:Community" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Community">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="teryc" type="xs:string" use="required"/>
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="ns1:CommunityType"/>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

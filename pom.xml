@@ -84,6 +84,8 @@
         <module>utils-text</module>
         <module>utils-jdbc</module>
         <module>excel-exporter</module>
+        <module>commons-dictionary</module>
+        <module>swing-worker</module>
     </modules>
 
     <!--pluginRepositories>
@@ -139,6 +141,17 @@
             <url>sftp://sites.softproject.com.pl/java-common-utilities</url>
         </site>
     </distributionManagement-->
+    
+    <repositories>
+        <repository>
+            <id>soft-project-maven</id>
+            <name>SoftProject Public Maven Repozytory</name>
+            <url>http://maven.soft-project.pl</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     
     <distributionManagement>
         <repository>

@@ -4,11 +4,11 @@
     <parent>
         <artifactId>java-common-utilities</artifactId>
         <groupId>pl.com.softproject.utils</groupId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.2-SNAPSHOT</version>
     </parent>
     <groupId>pl.com.softproject.utils</groupId>
     <artifactId>utils-jdbc</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>utils-jdbc</name>
     <url>http://kenai.com/projects/java-commons-utils/</url>
 

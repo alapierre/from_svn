@@ -4,7 +4,7 @@
     <groupId>pl.com.softproject.utils</groupId>
     <artifactId>java-common-utilities</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <name>java-common-utilities</name>
     <organization>
         <name>SoftProject</name>
@@ -17,11 +17,19 @@
     </developers>
     <url>http://xp-dev.com/svn/java-commons-util</url>
     <scm>
-        <connection>scm:svn:http://xp-dev.com/svn/java-commons-util</connection>
+        <connection>scm:svn:http://xp-dev.com/svn/java-commons-util/java-common-utilities-1.0.2</connection>
     </scm>
 
 
     <build>
+        <extensions>
+      <!-- Enabling the use of FTP -->
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>2.2</version>
+            </extension>
+        </extensions>
         <plugins>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
@@ -75,8 +83,8 @@
         <module>utils-xml</module>
         <module>utils-text</module>
         <module>utils-jdbc</module>
-    <module>excel-exporter</module>
-  </modules>
+        <module>excel-exporter</module>
+    </modules>
 
     <!--pluginRepositories>
         <pluginRepository>
@@ -117,7 +125,7 @@
         </site>
     </distributionManagement-->
 
-    <distributionManagement>
+    <!--distributionManagement>
         <repository>
             <id>softproject-maven</id>
             <url>sftp://maven.softproject.com.pl</url>
@@ -129,6 +137,21 @@
         <site>
             <id>softproject-sites</id>
             <url>sftp://sites.softproject.com.pl/java-common-utilities</url>
+        </site>
+    </distributionManagement-->
+    
+    <distributionManagement>
+        <repository>
+            <id>soft-project-maven</id>
+            <url>ftp://maven.soft-project.pl</url>
+        </repository>
+        <snapshotRepository>
+            <id>soft-project-maven</id>
+            <url>ftp://maven.soft-project.pl</url>
+        </snapshotRepository>
+        <site>
+            <id>soft-project-sites</id>
+            <url>ftp://maven.soft-project.pl/java-common-utilities</url>
         </site>
     </distributionManagement>
 

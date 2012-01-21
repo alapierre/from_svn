@@ -4,7 +4,7 @@
     <groupId>pl.com.softproject.utils</groupId>
     <artifactId>java-common-utilities</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <name>java-common-utilities</name>
     <organization>
         <name>SoftProject</name>
@@ -17,7 +17,7 @@
     </developers>
     <url>http://xp-dev.com/svn/java-commons-util</url>
     <scm>
-        <connection>scm:svn:http://xp-dev.com/svn/java-commons-util</connection>
+        <connection>scm:svn:http://xp-dev.com/svn/java-commons-util/java-common-utilities-1.0.2</connection>
     </scm>
 
 

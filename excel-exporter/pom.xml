@@ -4,7 +4,7 @@
     <parent>
         <artifactId>java-common-utilities</artifactId>
         <groupId>pl.com.softproject.utils</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
     <groupId>pl.com.softproject.utils</groupId>
     <artifactId>excel-exporter</artifactId>  

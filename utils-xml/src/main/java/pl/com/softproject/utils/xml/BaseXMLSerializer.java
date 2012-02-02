@@ -1,0 +1,170 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package pl.com.softproject.utils.xml;
+
+
+import java.io.*;
+import java.net.URL;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import org.xml.sax.SAXException;
+
+
+
+/**
+ * Klasa serializera dla pliku XML wniosku EURO
+ * 
+ * @author adrian
+ */
+public class BaseXMLSerializer<T> {
+
+    //static Logger logger = Logger.getLogger(XMLSerializer.class);
+
+    private JAXBContext jc;
+    private SchemaFactory sf;
+    private Schema schema;
+    
+    public String schemaLoaction;//= "http://www.uke.gov.pl/euro http://schema.softproject.com.pl/uke/uke-euro.xsd";
+
+    public BaseXMLSerializer(String contextPath, String xsdFileName, String schemaLocation) {
+        this.schemaLoaction = schemaLocation;
+        
+        try {
+            jc = JAXBContext.newInstance(contextPath);
+
+            sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI); 
+            URL url = getClass().getClassLoader().getResource(xsdFileName);            
+            schema = sf.newSchema(url);
+        } catch (SAXException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        } catch (JAXBException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        }
+    }
+
+    public T fromFile(File file) {
+        return fromFile(file, true);
+    }
+    
+    public T fromFile(File file, boolean validate) {
+        try {
+            Unmarshaller unmarshaller = jc.createUnmarshaller();
+            if(validate)
+                unmarshaller.setSchema(schema);
+            T document = (T) unmarshaller.unmarshal(file);
+
+            return document;
+
+        } catch (JAXBException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        }
+
+    }
+
+    public T fromStream(InputStream stream) {
+        return fromStream(stream, true);
+    }
+    
+    public T fromStream(InputStream stream, boolean validate) {
+        try {
+            Unmarshaller unmarshaller = jc.createUnmarshaller();
+            if(validate)
+                unmarshaller.setSchema(schema);
+            T document = (T) unmarshaller.unmarshal(stream);
+
+            return document;
+
+        } catch (JAXBException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        }
+
+    }
+
+    public T fromString(String xml) {
+        return fromString(xml, true);
+    }
+    
+    public T fromString(String xml, boolean validate) {
+        try {
+            Unmarshaller unmarshaller = jc.createUnmarshaller();
+            if(validate)
+                unmarshaller.setSchema(schema);
+            T wniosek = (T) unmarshaller.unmarshal(new StringReader(xml));
+            return wniosek;
+        } catch (JAXBException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        }
+    }
+
+    public void toFile(T dictionarys, String fileName) {
+        toFile(dictionarys, fileName, true);
+    }
+    
+    public void toFile(T document, String fileName, boolean validate) {
+        try {
+            Marshaller marshaller = jc.createMarshaller();        
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
+            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
+            if(validate)
+                marshaller.setSchema(schema);
+            marshaller.marshal(document, new FileOutputStream(fileName));
+
+        } catch (JAXBException ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        } catch (IOException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        }
+    }
+    
+    public void toFile(T document, String fileName, String encoding) {
+        toFile(document, fileName, encoding, true);
+    }
+    
+    public void toFile(T document, String fileName, String encoding, boolean validate) {
+        try {
+            Marshaller marshaller = jc.createMarshaller();        
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);  
+            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
+            if(validate)
+                marshaller.setSchema(schema);
+            marshaller.marshal(document, new FileOutputStream(fileName));
+
+        } catch (JAXBException ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        } catch (IOException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        }
+    }
+
+    public String toString(T document) {
+        return toString(document, true);
+    }
+    
+    public String toString(T document, boolean validate) {
+        try {
+            Marshaller marshaller = jc.createMarshaller();        
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
+            if(validate)
+                marshaller.setSchema(schema);
+            StringWriter sw = new StringWriter();          
+            marshaller.marshal(document, sw);
+            
+            return sw.toString();
+            
+        } catch (JAXBException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        } 
+        
+    }
+
+}

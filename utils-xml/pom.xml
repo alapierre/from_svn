@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>java-common-utilities</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>java-common-utilities</artifactId>
+        <groupId>pl.com.softproject.utils</groupId>
+        <version>1.0.3-SNAPSHOT</version>
+    </parent>
     <groupId>pl.com.softproject.utils</groupId>
+    <artifactId>utils-xml</artifactId>
     <version>1.0.3-SNAPSHOT</version>
-  </parent>
-  <groupId>pl.com.softproject.utils</groupId>
-  <artifactId>utils-xml</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
-  <name>utils-xml</name>
-  <url>http://maven.apache.org</url>
+    <name>utils-xml</name>
+    <url>http://maven.apache.org</url>
+  
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>        
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>pl.com.softproject.utils.xml.CommandLineValidator</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>        
+            </plugin>
+        </plugins>
+    </build>
+  
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>      
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>      
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+
+    
 
 </project>

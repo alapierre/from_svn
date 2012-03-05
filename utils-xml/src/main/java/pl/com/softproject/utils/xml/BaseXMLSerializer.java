@@ -8,13 +8,18 @@ package pl.com.softproject.utils.xml;
 
 import java.io.*;
 import java.net.URL;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.*;
+import javax.xml.bind.util.JAXBSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+import org.apache.log4j.Logger;
+import org.w3c.dom.Node;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 
 
@@ -25,7 +30,7 @@ import org.xml.sax.SAXException;
  */
 public class BaseXMLSerializer<T> {
 
-    //static Logger logger = Logger.getLogger(XMLSerializer.class);
+    static Logger logger = Logger.getLogger(BaseXMLSerializer.class);
 
     private JAXBContext jc;
     private SchemaFactory sf;
@@ -87,6 +92,25 @@ public class BaseXMLSerializer<T> {
 
     }
 
+    public T fromReader(Reader reader) {
+        return fromReader(reader, true);
+    }
+    
+    public T fromReader(Reader reader, boolean validate) {
+        try {
+            Unmarshaller unmarshaller = jc.createUnmarshaller();
+            if(validate)
+                unmarshaller.setSchema(schema);
+            T document = (T) unmarshaller.unmarshal(reader);
+
+            return document;
+
+        } catch (JAXBException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        }
+
+    }
+    
     public T fromString(String xml) {
         return fromString(xml, true);
     }
@@ -167,4 +191,59 @@ public class BaseXMLSerializer<T> {
         
     }
 
+    public boolean validate(T dsml, List<SAXParseException> exceptions) {          
+        try {
+            JAXBSource source = new JAXBSource(jc, dsml);
+            Validator validator = schema.newValidator();        
+            if (exceptions == null)
+                exceptions = new ArrayList<SAXParseException>();
+                
+            validator.setErrorHandler(new MyExceptionHandler(exceptions));        
+            validator.validate(source);
+            
+            if (!exceptions.isEmpty()) {
+                return false;
+            } else {
+                return true;
+            }            
+        } catch (SAXException ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        } catch(JAXBException ex) {                                                                                                                                                                                       
+            throw new RuntimeException(ex.getMessage(), ex);                                                                                                                                    
+        } catch(IOException ex) {                                                                                                                                                                                       
+            throw new XMLParseException(ex.getMessage(), ex);                                                                                                                                   
+        } 
+    }
+    
+    public JAXBElement convertFromDomNode(Node domNode, Class jaxbType) {
+        
+        try {            
+            Unmarshaller unmarshaller = jc.createUnmarshaller();
+            return unmarshaller.unmarshal(domNode, jaxbType);            
+            
+        } catch (JAXBException ex) {
+            throw new XMLParseException(ex.getMessage(), ex);
+        }      
+    }
+    
+    private class MyExceptionHandler implements ErrorHandler {
+ 
+        List<SAXParseException> exceptions = null;
+        
+        public MyExceptionHandler(List<SAXParseException> exceptions) {
+            this.exceptions = exceptions;
+        }
+        
+        public void warning(SAXParseException exception) throws SAXException {
+            logger.warn("", exception);
+        }
+
+        public void error(SAXParseException exception) throws SAXException {
+            exceptions.add(exception);
+        }
+
+        public void fatalError(SAXParseException exception) throws SAXException {
+            exceptions.add(exception);
+        }
+    }
 }

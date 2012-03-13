@@ -8,18 +8,11 @@ package pl.com.softproject.utils.xml;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.*;
-import javax.xml.bind.util.JAXBSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
-import org.apache.log4j.Logger;
 import org.w3c.dom.Node;
-import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 
 
@@ -29,8 +22,6 @@ import org.xml.sax.SAXParseException;
  * @author adrian
  */
 public class BaseXMLSerializer<T> {
-
-    static Logger logger = Logger.getLogger(BaseXMLSerializer.class);
 
     private JAXBContext jc;
     private SchemaFactory sf;
@@ -190,33 +181,8 @@ public class BaseXMLSerializer<T> {
         } 
         
     }
-
-    public boolean validate(T dsml, List<SAXParseException> exceptions) {          
-        try {
-            JAXBSource source = new JAXBSource(jc, dsml);
-            Validator validator = schema.newValidator();        
-            if (exceptions == null)
-                exceptions = new ArrayList<SAXParseException>();
-                
-            validator.setErrorHandler(new MyExceptionHandler(exceptions));        
-            validator.validate(source);
-            
-            if (!exceptions.isEmpty()) {
-                return false;
-            } else {
-                return true;
-            }            
-        } catch (SAXException ex) {
-            throw new RuntimeException(ex.getMessage(), ex);
-        } catch(JAXBException ex) {                                                                                                                                                                                       
-            throw new RuntimeException(ex.getMessage(), ex);                                                                                                                                    
-        } catch(IOException ex) {                                                                                                                                                                                       
-            throw new XMLParseException(ex.getMessage(), ex);                                                                                                                                   
-        } 
-    }
     
-    public JAXBElement convertFromDomNode(Node domNode, Class jaxbType) {
-        
+    public JAXBElement convertFromDomNode(Node domNode, Class jaxbType) {        
         try {            
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             return unmarshaller.unmarshal(domNode, jaxbType);            
@@ -224,26 +190,5 @@ public class BaseXMLSerializer<T> {
         } catch (JAXBException ex) {
             throw new XMLParseException(ex.getMessage(), ex);
         }      
-    }
-    
-    private class MyExceptionHandler implements ErrorHandler {
- 
-        List<SAXParseException> exceptions = null;
-        
-        public MyExceptionHandler(List<SAXParseException> exceptions) {
-            this.exceptions = exceptions;
-        }
-        
-        public void warning(SAXParseException exception) throws SAXException {
-            logger.warn("", exception);
-        }
-
-        public void error(SAXParseException exception) throws SAXException {
-            exceptions.add(exception);
-        }
-
-        public void fatalError(SAXParseException exception) throws SAXException {
-            exceptions.add(exception);
-        }
     }
 }

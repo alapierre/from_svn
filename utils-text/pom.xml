@@ -4,11 +4,11 @@
   <parent>
     <artifactId>java-common-utilities</artifactId>
     <groupId>pl.com.softproject.utils</groupId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
   </parent>
   <groupId>pl.com.softproject.utils</groupId>
   <artifactId>utils-text</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4-SNAPSHOT</version>
   <name>utils-text</name>
   
   <dependencies>

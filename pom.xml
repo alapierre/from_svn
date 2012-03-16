@@ -88,7 +88,7 @@
         <module>swing-worker</module>
     </modules>
 
-    <!--pluginRepositories>
+    <pluginRepositories>
         <pluginRepository>
             <id>csartifactory</id>
             <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-releases</url>
@@ -125,7 +125,7 @@
             <id>cssitedeploy</id>
             <url>scp://maven.pl.chartsearch.net/export/home0/maven/sites/chartsource-masterpom</url>
         </site>
-    </distributionManagement-->
+    </distributionManagement>
 
     <!--distributionManagement>
         <repository>
@@ -142,7 +142,7 @@
         </site>
     </distributionManagement-->
     
-    <repositories>
+    <!--repositories>
         <repository>
             <id>soft-project-maven</id>
             <name>SoftProject Public Maven Repozytory</name>
@@ -166,6 +166,6 @@
             <id>soft-project-sites</id>
             <url>ftp://maven.soft-project.pl/java-common-utilities</url>
         </site>
-    </distributionManagement>
+    </distributionManagement-->
 
 </project>

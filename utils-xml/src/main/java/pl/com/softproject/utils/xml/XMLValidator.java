@@ -191,7 +191,7 @@ public class XMLValidator {
         }
     }   
         
-    private static class XMLErrorExtensionHandler extends XMLErrorHandler {
+    public static class XMLErrorExtensionHandler extends XMLErrorHandler {
         
         public XMLErrorExtensionHandler(List<SAXParseException> exceptions) {
             super(exceptions);

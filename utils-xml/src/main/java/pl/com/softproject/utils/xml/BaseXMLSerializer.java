@@ -8,11 +8,14 @@ package pl.com.softproject.utils.xml;
 
 import java.io.*;
 import java.net.URL;
+
 import javax.xml.bind.*;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
+import sun.misc.IOUtils;
 
 
 
@@ -26,6 +29,7 @@ public class BaseXMLSerializer<T> {
     private JAXBContext jc;
     private SchemaFactory sf;
     private Schema schema;
+    Logger logger = Logger.getLogger(getClass());
     
     public String schemaLoaction;//= "http://www.uke.gov.pl/euro http://schema.softproject.com.pl/uke/uke-euro.xsd";
 
@@ -123,18 +127,24 @@ public class BaseXMLSerializer<T> {
     }
     
     public void toFile(T document, String fileName, boolean validate) {
+        
+        OutputStream out = null;
+        
         try {
             Marshaller marshaller = jc.createMarshaller();        
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
             marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
             if(validate)
                 marshaller.setSchema(schema);
-            marshaller.marshal(document, new FileOutputStream(fileName));
+            out = new FileOutputStream(fileName);
+            marshaller.marshal(document, out);
 
         } catch (JAXBException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         } catch (IOException ex) {
             throw new XMLParseException(ex.getMessage(), ex);
+        } finally {
+            quietlyClose(out);
         }
     }
     
@@ -143,6 +153,9 @@ public class BaseXMLSerializer<T> {
     }
     
     public void toFile(T document, String fileName, String encoding, boolean validate) {
+        
+        OutputStream out = null;
+        
         try {
             Marshaller marshaller = jc.createMarshaller();        
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
@@ -150,12 +163,15 @@ public class BaseXMLSerializer<T> {
             marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
             if(validate)
                 marshaller.setSchema(schema);
-            marshaller.marshal(document, new FileOutputStream(fileName));
+            out = new FileOutputStream(fileName);
+            marshaller.marshal(document, out);
 
         } catch (JAXBException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         } catch (IOException ex) {
             throw new XMLParseException(ex.getMessage(), ex);
+        } finally {
+            quietlyClose(out);
         }
     }
 
@@ -190,5 +206,14 @@ public class BaseXMLSerializer<T> {
         } catch (JAXBException ex) {
             throw new XMLParseException(ex.getMessage(), ex);
         }      
+    }
+
+    private void quietlyClose(OutputStream out) {
+        if(out != null) 
+            try {
+            out.close();
+        } catch (IOException ex) {
+            logger.warn(ex.getMessage());
+        }
     }
 }

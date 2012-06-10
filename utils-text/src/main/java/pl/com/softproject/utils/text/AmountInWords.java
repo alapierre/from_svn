@@ -149,4 +149,14 @@ public class AmountInWords {
         strKwotaSl = toWords(liczba_zlotych(kwota)) + " z³ " + toWords(liczba_groszy(kwota)) + " gr";
         return strKwotaSl;
     }
+    
+    public static String toWords(double kwota, String currency) {
+
+        if (kwota < 0) {
+            kwota = kwota * -1;
+        }
+        String strKwotaSl;
+        strKwotaSl = toWords(liczba_zlotych(kwota)) + " " + currency + " " + liczba_groszy(kwota) + "/100";
+        return strKwotaSl;
+    }
 }

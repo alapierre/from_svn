@@ -64,7 +64,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <reporting>
+    <!--reporting>
         <plugins>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -75,7 +75,7 @@
                 </configuration>
             </plugin>
         </plugins>
-    </reporting>
+    </reporting-->
 
 
     <modules>
@@ -86,6 +86,7 @@
         <module>excel-exporter</module>
         <module>commons-dictionary</module>
         <module>swing-worker</module>
+        <module>swing-extentions</module>
     </modules>
 
     <pluginRepositories>

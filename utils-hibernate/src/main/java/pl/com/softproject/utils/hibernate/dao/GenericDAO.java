@@ -77,4 +77,6 @@ public interface GenericDAO <T, PK extends Serializable> {
      * @return lista encji
      */
     public List<T> searchByExample(final T exampleEntity, List<String> excludeProperty);
+
+    void persist(T o);
 }

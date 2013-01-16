@@ -41,6 +41,10 @@ public class GenericDAOHibernateImpl<T, PK extends Serializable> extends
 		return (T) getHibernateTemplate().load(type, id);
 	}
 
+        public void persist(T o) {
+            getHibernateTemplate().persist(o);
+        }
+        
 	public void update(T o) {
 		getHibernateTemplate().saveOrUpdate(o);
 	}

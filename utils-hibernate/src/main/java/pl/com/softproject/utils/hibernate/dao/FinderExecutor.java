@@ -2,6 +2,7 @@ package pl.com.softproject.utils.hibernate.dao;
 
 import java.lang.reflect.Method;
 import java.util.*;
+import org.springframework.orm.hibernate3.HibernateCallback;
 
 /**
  * Find Executor Interface
@@ -19,4 +20,6 @@ public interface FinderExecutor<T>
     Iterator<T> iterateFinder(Method method, Object[] queryArgs);
 
 //    ScrollableResults scrollFinder(Method method, Object[] queryArgs);
+
+    Object executeHibernateCallback(HibernateCallback callback);
 }

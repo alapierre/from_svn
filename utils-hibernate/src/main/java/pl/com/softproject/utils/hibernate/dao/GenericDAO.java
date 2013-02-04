@@ -2,6 +2,7 @@ package pl.com.softproject.utils.hibernate.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import org.hibernate.criterion.DetachedCriteria;
 
 /**
  * Genieric DAO interface
@@ -79,4 +80,8 @@ public interface GenericDAO <T, PK extends Serializable> {
     public List<T> searchByExample(final T exampleEntity, List<String> excludeProperty);
 
     void persist(T o);
+
+    List<T> searchByCriteria(DetachedCriteria criteria);
+
+    List<T> searchByHQLQuery(String query, Object... params);
 }

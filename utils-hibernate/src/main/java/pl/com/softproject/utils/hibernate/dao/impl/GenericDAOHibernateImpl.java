@@ -11,6 +11,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -82,6 +83,7 @@ public class GenericDAOHibernateImpl<T, PK extends Serializable> extends
 		return executeExampleQuery(example, sortProperity, ascending);
 	}
 	
+        @Override
 	public List<T> searchByExample(final T exampleEntity, List<String> excludeProperty) {
 		
 		Example example = Example.create(exampleEntity)
@@ -97,7 +99,17 @@ public class GenericDAOHibernateImpl<T, PK extends Serializable> extends
 		
 		return executeExampleQuery(example);
 	}
+        
+        @Override
+        public List<T> searchByCriteria(DetachedCriteria criteria) {
+            return getHibernateTemplate().findByCriteria(criteria);
+        }
 	
+        @Override
+        public List<T> searchByHQLQuery(String query, Object ... params) {
+            return getHibernateTemplate().find(query, params);
+        }
+        
 	@SuppressWarnings("unchecked")
 	public List<T> searchAllOrdered(final String sortProperity, final boolean ascending) {
 		return getHibernateTemplate().executeFind(new HibernateCallback() {

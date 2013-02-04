@@ -4,6 +4,8 @@
 package pl.com.softproject.utils.pivot;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -21,5 +23,9 @@ public interface PivotTableModel {
 //    Class getColumnClass(int columnIndex);
 //    Object getValueAt(int rowIndex, int columnIndex);
 //    void setValueAt(Object aValue, int rowIndex, int columnIndex);
+
+    List<String> getRowNames();
+
+    Set<String> getColumnNames();
     
 }

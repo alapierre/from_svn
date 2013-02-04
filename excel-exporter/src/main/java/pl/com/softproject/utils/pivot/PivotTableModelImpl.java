@@ -31,6 +31,29 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
         return new RowIterator(this);
     }
     
+    @Override
+    public List<String> getRowNames() {
+        
+        List<String> rows = new ArrayList<String>();
+        
+        for(Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
+            rows.add(entry.getKey());
+        }
+        return rows;
+    }
+    
+    
+    @Override
+    public Set<String> getColumnNames() {
+        
+        Set<String> columns = new HashSet<String>();
+        
+        for(Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
+            columns.addAll(entry.getValue().keySet());
+        }
+        return columns;
+    }
+    
     public void test() {
         System.out.println("map: " + map);
         

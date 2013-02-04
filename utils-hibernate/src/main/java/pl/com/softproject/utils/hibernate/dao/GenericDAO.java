@@ -3,6 +3,7 @@ package pl.com.softproject.utils.hibernate.dao;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.orm.hibernate3.HibernateCallback;
 
 /**
  * Genieric DAO interface
@@ -84,4 +85,6 @@ public interface GenericDAO <T, PK extends Serializable> {
     List<T> searchByCriteria(DetachedCriteria criteria);
 
     List<T> searchByHQLQuery(String query, Object... params);
+    
+    Object executeHibernateCallback(HibernateCallback callback);
 }

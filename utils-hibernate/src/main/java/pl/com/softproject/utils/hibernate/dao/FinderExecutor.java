@@ -21,5 +21,5 @@ public interface FinderExecutor<T>
 
 //    ScrollableResults scrollFinder(Method method, Object[] queryArgs);
 
-    Object executeHibernateCallback(HibernateCallback callback);
+    
 }

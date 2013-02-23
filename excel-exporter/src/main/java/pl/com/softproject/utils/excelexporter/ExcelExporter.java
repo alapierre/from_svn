@@ -24,6 +24,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * Serializuje obiekty do pliku .xls
@@ -200,7 +201,18 @@ public class ExcelExporter {
         wb = new HSSFWorkbook();
         sheet = wb.createSheet(sheetName);
     }
-
+    
+    public void addSheet(String name) {
+        sheetName = name;
+        sheet = wb.createSheet(name);
+        currentColumnNumber = 0;
+        currentRowNumber = 0;
+    }
+    
+    public Workbook getWorkbook() {
+        return wb;
+    }
+    
     protected void createHeaderRow() {
         header = sheet.createRow(currentRowNumber);
         for(ColumnDescriptor column : columns) {

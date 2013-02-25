@@ -77,6 +77,11 @@ public class PivotTableExcelExporter {
     }
 
     public void saveWorkbook(File file) throws FileNotFoundException, IOException {
+        
+        if (wb == null) {
+            createWorkbook();
+        }
+        
         FileOutputStream out = new FileOutputStream(file);
         wb.write(out);
         out.close();

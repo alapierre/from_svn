@@ -89,17 +89,17 @@
         <module>swing-extentions</module>
     </modules>
 
-    <pluginRepositories>
+    <!--pluginRepositories>
         <pluginRepository>
             <id>csartifactory</id>
-            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-releases</url>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
     <repositories>
         <repository>
             <id>csartifactory-snapshots</id>
             <name>artifactory server</name>
-            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-snapshots</url>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -107,25 +107,51 @@
         <repository>
             <id>csartifactory</id>
             <name>artifactory server</name>
-            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-releases</url>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-release</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories-->
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>csartifactory</id>
+            <url>http://repo.softproject.com.pl/artifactory/libs-release</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+        <repository>
+            <id>csartifactory-snapshots</id>
+            <name>artifactory server</name>
+            <url>http://repo.softproject.com.pl/artifactory/libs-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>csartifactory</id>
+            <name>artifactory server</name>
+            <url>http://repo.softproject.com.pl/artifactory/libs-release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
     </repositories>
+    
     <distributionManagement>
         <repository>
             <id>csdeploy</id>
-            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-releases-local</url>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-release-local</url>
         </repository>
         <snapshotRepository>
             <id>cssnapshot</id>
-            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-snapshots-local</url>
+            <url>http://artifactory.pl.chartsearch.net:8081/artifactory/libs-snapshot-local</url>
         </snapshotRepository>
-        <site>
+        <!--site>
             <id>cssitedeploy</id>
             <url>scp://maven.pl.chartsearch.net/export/home0/maven/sites/chartsource-masterpom</url>
-        </site>
+        </site-->
     </distributionManagement>
 
     <!--distributionManagement>

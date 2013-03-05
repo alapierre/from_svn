@@ -122,6 +122,24 @@ public class BaseXMLSerializer<T> {
         }
     }
 
+    public void toStream(T order, OutputStream os) {
+        toStream(order, os, false);
+    }
+    
+    public void toStream(T order, OutputStream os, boolean validate) {
+        try {
+            Marshaller marshaller = jc.createMarshaller();        
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
+            if(validate)
+                marshaller.setSchema(schema);
+            
+            marshaller.marshal(order, os);
+
+        } catch (JAXBException ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        } 
+    }
+    
     public void toFile(T dictionarys, String fileName) {
         toFile(dictionarys, fileName, true);
     }

@@ -24,6 +24,13 @@ public class PivotTableExcelExporter {
 
     private Workbook wb;
 
+    public PivotTableExcelExporter() {
+    }
+
+    public PivotTableExcelExporter(Workbook wb) {
+        this.wb = wb;
+    }
+    
     private void createWorkbook() {
         wb = new HSSFWorkbook();
     }

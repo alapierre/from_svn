@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellReference;
 
 /**
  *
@@ -23,6 +24,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class PivotTableExcelExporter {
 
     private Workbook wb;
+    private boolean addSumarryColumn;
 
     public PivotTableExcelExporter() {
     }
@@ -71,6 +73,9 @@ public class PivotTableExcelExporter {
                 Number number = (Number) pivotRow.get(mag);
                 cell.setCellValue(number != null ? number.doubleValue() : 0);
             }
+            if(addSumarryColumn) {
+                addSumarryColumn(cellnum, rownum, row);
+            }
 
         }
 
@@ -104,6 +109,29 @@ public class PivotTableExcelExporter {
             cell.setCellValue(colName);
             cell.setCellStyle(cs);
         }
+        if(addSumarryColumn) {
+            Cell cell = row.createCell(cellnum++);
+            cell.setCellValue("suma");
+            cell.setCellStyle(cs);
+        }
+        
         return row;
     }
+
+    public void setAddSumarryColumn(boolean addSumarryColumn) {
+        this.addSumarryColumn = addSumarryColumn;
+    }
+    
+    
+
+    private void addSumarryColumn(int cellnum, int rownum, Row row) {
+        Cell cell = row.createCell(cellnum);
+        CellReference cellReference = new org.apache.poi.hssf.util.CellReference(rownum-1, cellnum-1, false, false);
+        CellReference startCellReference = new org.apache.poi.hssf.util.CellReference(rownum-1, 1, false, false);
+        
+        cellReference.formatAsString();
+        String formula = "sum(" + startCellReference.formatAsString() + ":" + cellReference.formatAsString() + ")";
+        cell.setCellFormula(formula);
+    }
+
 }

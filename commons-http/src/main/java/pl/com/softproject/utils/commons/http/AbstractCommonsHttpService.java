@@ -38,9 +38,9 @@ import org.springframework.beans.factory.InitializingBean;
 public class AbstractCommonsHttpService implements InitializingBean, DisposableBean {
     
     protected Logger logger = Logger.getLogger(getClass());
-    protected String shopURL;
-    protected String shopUserName;
-    protected String shopUserPassword;
+    protected String serviceURL;
+    protected String serviceUserName;
+    protected String serviceUserPassword;
     private DefaultHttpClient httpclient = new DefaultHttpClient(new ThreadSafeClientConnManager());
     
     public AbstractCommonsHttpService() {
@@ -49,12 +49,12 @@ public class AbstractCommonsHttpService implements InitializingBean, DisposableB
     }
 
     public AbstractCommonsHttpService(String url) {
-        this.shopURL = url;        
+        this.serviceURL = url;        
     }
     
     protected String invokeRemoteServiceAndReturnResultAsString(String serviceNameAndParam) throws MalformedURLException, URISyntaxException, IOException {
         
-            URL source = new URL(shopURL + serviceNameAndParam);
+            URL source = new URL(serviceURL + serviceNameAndParam);
             HttpEntity entity = getHttpEntity(source);
             if (entity != null) {
                 return EntityUtils.toString(entity);
@@ -76,8 +76,8 @@ public class AbstractCommonsHttpService implements InitializingBean, DisposableB
     
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (shopUserName != null && !shopUserName.isEmpty()) {
-            UsernamePasswordCredentials creds = new UsernamePasswordCredentials(shopUserName, shopUserPassword);
+        if (serviceUserName != null && !serviceUserName.isEmpty()) {
+            UsernamePasswordCredentials creds = new UsernamePasswordCredentials(serviceUserName, serviceUserPassword);
             httpclient.getCredentialsProvider().setCredentials(
                     new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
                     creds);
@@ -90,24 +90,24 @@ public class AbstractCommonsHttpService implements InitializingBean, DisposableB
         httpclient.getConnectionManager().shutdown();
     }
 
-    public void setShopURL(String shopURL) {
-        this.shopURL = shopURL;
+    public void setServiceURL(String serviceURL) {
+        this.serviceURL = serviceURL;
     }
 
-    public String getShopUserName() {
-        return shopUserName;
+    public String getServiceUserName() {
+        return serviceUserName;
     }
 
-    public void setShopUserName(String shopUserName) {
-        this.shopUserName = shopUserName;
+    public void setServiceUserName(String serviceUserName) {
+        this.serviceUserName = serviceUserName;
     }
 
-    public String getShopUserPassword() {
-        return shopUserPassword;
+    public String getServiceUserPassword() {
+        return serviceUserPassword;
     }
 
-    public void setShopUserPassword(String shopUserPassword) {
-        this.shopUserPassword = shopUserPassword;
+    public void setServiceUserPassword(String serviceUserPassword) {
+        this.serviceUserPassword = serviceUserPassword;
     }
     
 }

@@ -87,7 +87,8 @@
         <module>commons-dictionary</module>
         <module>swing-worker</module>
         <module>swing-extentions</module>
-    </modules>
+    <module>commons-http</module>
+  </modules>
 
     <!--pluginRepositories>
         <pluginRepository>

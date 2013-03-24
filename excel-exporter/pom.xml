@@ -9,7 +9,7 @@
     <groupId>pl.com.softproject.utils</groupId>
     <artifactId>excel-exporter</artifactId>  
     <name>excel-exporter</name>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.10-SNAPSHOT</version>
     <url>http://maven.apache.org</url>
   <build>
     <plugins>

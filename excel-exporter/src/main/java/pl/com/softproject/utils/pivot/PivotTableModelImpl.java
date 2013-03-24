@@ -31,6 +31,11 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
         return new RowIterator(this);
     }
     
+    public Object get(String rowKey, String columnKey) {
+        Map<String, Object> tmp = map.get(rowKey);
+        return tmp != null ? tmp.get(columnKey) : null;
+    }
+    
     @Override
     public List<String> getRowNames() {
         

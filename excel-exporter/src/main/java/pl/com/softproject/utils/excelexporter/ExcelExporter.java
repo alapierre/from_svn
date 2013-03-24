@@ -69,7 +69,14 @@ public class ExcelExporter {
         columns.add(columnDescriptor);
         return this;
     }
-
+    
+    /**
+     * Usuwa zdefiniowane kolumny dla arkusza
+     */
+    public void clearColumns() {
+        columns.clear();
+    }
+    
     /**
      * Dodaje wiersz do akrusza pobierając refleksją dane z dostarczonego beana
      *

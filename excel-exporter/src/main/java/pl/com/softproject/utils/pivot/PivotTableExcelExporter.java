@@ -68,9 +68,9 @@ public class PivotTableExcelExporter {
             cell = row.createCell(0);
             cell.setCellValue(rowKey);
             short cellnum = 1;
-            for (String mag : columns) {
+            for (String column : columns) {
                 cell = row.createCell(cellnum++);
-                Number number = (Number) pivotRow.get(mag);
+                Number number = (Number) pivotRow.get(column);
                 cell.setCellValue(number != null ? number.doubleValue() : 0);
             }
             if(addSumarryColumn) {

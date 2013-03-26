@@ -1,0 +1,35 @@
+<jnlp spec="$jnlpspec" codebase="$project.Url" href="$outputFile">
+  <information>
+#if($project.Name)
+    <title>XML Validator</title>
+#end
+
+    <vendor>SoftProject Adrian Lapierre-Mroz</vendor>
+    <shortcut online="true">
+      <desktop/>
+      <menu submenu="SoftProject"/>
+    </shortcut>
+
+    <homepage href="http://softproject.com.pl/" />
+#if($project.Description)
+    <description>$project.Description</description>
+#end
+    <icon href="icon.png"/>
+    <icon width="32" height="32" href="icon32.png"/>   
+    <icon width="48" height="48" href="icon48.png"/> 
+    <!--icon kind="splash" href="splash.jpg"/-->
+#if($offlineAllowed)
+    <offline-allowed />
+#end
+  </information>
+#if($allPermissions)
+  <security>
+     <all-permissions />
+  </security>
+#end
+  <resources>
+    <j2se version="$j2seVersion" />
+     $dependencies
+  </resources>
+  <application-desc main-class="$mainClass" />
+</jnlp>

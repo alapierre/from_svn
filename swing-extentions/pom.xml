@@ -1,34 +1,117 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>java-common-utilities</artifactId>
         <groupId>pl.com.softproject.utils</groupId>
         <version>1.0.4-SNAPSHOT</version>
     </parent>
-  <groupId>pl.com.softproject.utils</groupId>
-  <artifactId>swing-extentions</artifactId>
+    <groupId>pl.com.softproject.utils</groupId>
+    <artifactId>swing-extentions</artifactId>
   
-  <packaging>jar</packaging>
+    <packaging>jar</packaging>
 
-  <name>swing-extentions</name>
-  <url>http://maven.apache.org</url>
+    <name>swing-extentions</name>
+    <url>http://jnlp.softproject.com.pl/xml-validator</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo.webstart</groupId>
+                <artifactId>webstart-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+                    <excludeTransitive>false</excludeTransitive>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jdesktop</groupId>
-      <artifactId>beansbinding</artifactId>
-      <version>1.2.1</version>
-    </dependency>
-  </dependencies>
+                    <!-- JNLP generation -->
+                    <jnlp>
+                        <!-- default values -->
+                         <!--inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath-->
+                        <inputTemplate>src/main/jnlp/template.vm</inputTemplate> <!-- relative to inputTemplateResourcePath -->
+                        <outputFile>validator.jnlp</outputFile> <!-- defaults to launch.jnlp -->
+
+                        <mainClass>pl.com.softproject.utils.swingx.xml.validator.XmlValidatorGUI</mainClass>
+                    </jnlp>
+
+                    <!--sign>
+                        <keystore>c:/Users/Adrian/.keystore/chartsearch-key-store</keystore>
+                        <keypass>1qasw2</keypass> 
+                        <storepass>1qasw2</storepass>
+                        <alias>chartsearch</alias>
+                    </sign-->
+                    
+                    <sign>
+                        <keystore>c:/Users/Adrian.CS/.keystore/softproject-key-store</keystore>
+                        <keypass>1qasw2</keypass> 
+                        <storepass>1qasw2</storepass>
+                        <alias>softproject-2013</alias>
+                        <!--alias>devel</alias-->
+                    </sign>
+
+                    <!-- BUILDING PROCESS -->
+
+                    <pack200>false</pack200>
+                    <gzip>true</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
+
+                     <!-- causes a version attribute to be output in each jar resource element, optional, default is false -->
+                    <outputJarVersions>false</outputJarVersions>
+
+                    <!--install>false</install--> <!-- not yet supported -->
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+            
+        </plugins>
+    </build>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jdesktop</groupId>
+            <artifactId>beansbinding</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>utils-xml</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>swing-worker</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+        </dependency>
+    
+    
+        <dependency>
+            <groupId>org.swinglabs.swingx</groupId>
+            <artifactId>swingx-all</artifactId>
+            <version>1.6.4</version>
+        </dependency>
+    
+    </dependencies>
 </project>

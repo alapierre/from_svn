@@ -5,6 +5,7 @@ package pl.com.softproject.utils.pivot;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -15,6 +16,14 @@ public interface PivotTableModel {
 
     void add(String rowKey, String columnKey, Object value);
 
+    void addRow(String rowKey, Map<String, Object> rowValue);
+    
+    void addColumn(String columnKey, Object value) throws Exception;
+    
+    void addColumn(String columnKey, Map<String, Object> rowKeyToColumnValueMap);
+         
+    void removeColumn(String columnKey);
+    
     Iterator iterator();
     
 //    String[] getColumnNames();    

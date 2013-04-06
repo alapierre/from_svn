@@ -3,6 +3,7 @@
  */
 package pl.com.softproject.utils.pivot;
 
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -18,7 +19,7 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
     public void add(String rowKey, String columnKey, Object value) {
         Map<String, Object> row = map.get(rowKey);
         if(row == null) {
-            row = new HashMap<String, Object>();
+            row = new LinkedHashMap<String, Object>();
             row.put(columnKey, value);
             map.put(rowKey, row);
         } else {
@@ -26,6 +27,62 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
         }
     }
     
+    @Override
+    public void addRow(String rowKey, Map<String, Object> rowValue) {
+        map.put(rowKey, rowValue);
+    }
+    
+    /**Metoda do wypełniania całej kolumny jedną wartością**/
+    @Override
+    public void addColumn(String columnKey, Object columnValue) throws Exception {
+    
+        if (columnValue instanceof Cloneable) {
+        
+            for (String rowKey : map.keySet()) {
+                               
+                Method clone = columnValue.getClass().getMethod("clone");                
+                columnValue = clone.invoke(columnValue);                
+                add(rowKey, columnKey, columnValue);
+            }        
+        } else {
+            throw new RuntimeException("Not Supported Yet.");
+        }
+    }
+            
+    /**
+     * Metoda do dodawania całej kolumny różnymi wartościami
+     * 
+     * @param columnKey - klucz kolumny
+     * @param rowKeyToColumnValueMap - mapowanie rowKey na columnValue 
+     */
+    @Override
+    public void addColumn(String columnKey, Map<String, Object> rowKeyToColumnValueMap) {
+        
+        for (Map.Entry<String, Object> rowKeyToColumnValue : rowKeyToColumnValueMap.entrySet()) {
+            
+            String rowKey = rowKeyToColumnValue.getKey();
+            Object columnValue = rowKeyToColumnValue.getValue();
+            
+            add(rowKey, columnKey, columnValue);            
+        }
+    }
+    
+    @Override
+    public void removeColumn(String columnKey) {
+        
+        RowIterator iter = (RowIterator)iterator();
+        
+        while (iter.hasNext()) {            
+            Map<String, Object> columnMap = iter.next();
+            
+            if (columnMap != null) {                
+                columnMap.remove(columnKey);            
+                if (columnMap.isEmpty())
+                    iter.remove();                
+            }        
+        }
+    }
+        
     @Override
     public Iterator  iterator() {
         return new RowIterator(this);
@@ -46,15 +103,18 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
         }
         return rows;
     }
-    
-    
+        
     @Override
     public Set<String> getColumnNames() {
         
-        Set<String> columns = new HashSet<String>();
+        Set<String> columns = new LinkedHashSet<String>();
         
         for(Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
-            columns.addAll(entry.getValue().keySet());
+            //columns.addAll(entry.getValue().keySet());
+            Map<String, Object> m = entry.getValue();
+            for (Map.Entry<String, Object> e : m.entrySet()) {
+                columns.add(e.getKey());
+            }            
         }
         return columns;
     }
@@ -100,7 +160,9 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException("Not supported yet.");
+            //Kasujemy cały rekord bo nie ma sensu,
+            //żeby istniał wiersz, który dla każdej kolumny ma wartość null
+            it.remove();
         }
         
         public String rowKey() {

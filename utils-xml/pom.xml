@@ -8,7 +8,7 @@
     </parent>
     <groupId>pl.com.softproject.utils</groupId>
     <artifactId>utils-xml</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
     <name>utils-xml</name>
     <url>http://maven.apache.org</url>
   

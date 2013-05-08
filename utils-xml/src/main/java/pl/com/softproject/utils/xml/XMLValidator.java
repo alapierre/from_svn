@@ -37,10 +37,10 @@ public class XMLValidator {
     private static Logger logger = Logger.getLogger(XMLValidator.class);
     
    /**
-     * Sprawdza skï¿½adnie XML w przekazanym dokumencie
+     * Sprawdza sk³adnie XML w przekazanym dokumencie
      *
      * @param reader - Reader do dokumentu XML
-     * @param errors - zainicjowana kolekcja, w ktï¿½rej zostanï¿½ zwrï¿½cone bï¿½ï¿½dy. Kolekcja zostanie wyzerowana.
+     * @param errors - zainicjowana kolekcja, w której zostan¹½ zwrócone b³êdy. Kolekcja zostanie wyzerowana.
      * @return
      * @throws javax.xml.parsers.ParserConfigurationException
      * @throws java.io.IOException
@@ -64,10 +64,10 @@ public class XMLValidator {
     }
 
     /**
-     * Validuje XML wzglï¿½dem XML Schemy
+     * Validuje XML wzglêdem XML Schemy
      *
      * @param reader - Reader do dokumentu XML
-     * @param schemaLocation - url do shcemy XML, jeï¿½li jest null to zostanie uï¿½yta schema wskazana w atrybucie schemaLocation z dokumentu XML
+     * @param schemaLocation - url do shcemy XML, je¿li jest null to zostanie u¿yta schema wskazana w atrybucie schemaLocation z dokumentu XML
      * @param errors  - zainicjowana kolekcja, w ktï¿½rej zostanï¿½ zwrï¿½cone bï¿½ï¿½dy. Kolekcja zostanie wyzerowana.
      * @return - true jeï¿½li dokument validuje siï¿½
      * @throws org.xml.sax.SAXException - jeï¿½li nie moï¿½na zainicjowaï¿½ parsera
@@ -106,12 +106,12 @@ public class XMLValidator {
     }
 
     /**
-     * Validuje XML wzglï¿½dem XML Schemy, lokalizacja schemy bï¿½dzie pobrana z atrybutu schemaLocation z dokumentu XML
+     * Validuje XML wzglêdem XML Schemy, lokalizacja schemy bêdzie pobrana z atrybutu schemaLocation z dokumentu XML
      *
      * @param reader - Reader do dokumentu XML
-     * @param errors  - zainicjowana kolekcja, w ktï¿½rej zostanï¿½ zwrï¿½cone bï¿½ï¿½dy. Kolekcja zostanie wyzerowana.
-     * @return - true jeï¿½li dokument validuje siï¿½
-     * @throws org.xml.sax.SAXException - jeï¿½li nie moï¿½na zainicjowaï¿½ parsera
+     * @param errors  - zainicjowana kolekcja, w której zostan¹ zwrócone b³êdy. Kolekcja zostanie wyzerowana.
+     * @return - true jeœli dokument validuje siê
+     * @throws org.xml.sax.SAXException - jeœli nie mo¿na zainicjowaæ parsera
      * @throws java.io.IOException - jeï¿½li nie moï¿½na czytaï¿½ z Readera
      */
     public static boolean validate(Reader reader, Collection<SAXParseException> errors) throws SAXException, IOException {
@@ -120,13 +120,13 @@ public class XMLValidator {
     }
 
     /**
-     * Validuje XML wzglÄ™dem XML Schemy, lokalizacja schemy bï¿½dzie pobrana z atrybutu schemaLocation z dokumentu XML
-     * Metoda z zaÅ‚oÅ¼enia, nigdy nie rzuca wyjÄ…tkami. Gdy walidacje nie przejdzie zwraca po prostu "false".
+     * Validuje XML wzglêdem XML Schemy, lokalizacja schemy bêdzie pobrana z atrybutu schemaLocation z dokumentu XML
+     * Metoda z za³o¿enia, nigdy nie rzuca wy¹kami. Gdy walidacje nie przejdzie zwraca po prostu "false".
      * @param <T>
-     * @param dsml - dokument ktÃ³ry powstaÅ‚ w wyniku wywoÅ‚ania metody "unmarshal". Np. DsmlDocument lub DomainsDocument.
-     * @param xsdFileName - nazwa pliku xsd, jeÅ›li jest null to zostanie uÅ¼yta schema wskazana w atrybucie schemaLocation z dokumentu XML.
-     * @param exceptions - kolekcja, w ktÃ³rej zostanÄ… zwrÃ³cone bÅ‚Ä™dy.
-     * @return - true jeÅ›li dokument przechodzi poprawnie walidacjÄ™.
+     * @param dsml - dokument który powsta³‚ w wyniku wywo³ania metody "unmarshal". Np. DsmlDocument lub DomainsDocument.
+     * @param xsdFileName - nazwa pliku xsd, jeœli jest null to zostanie u¿yta schema wskazana w atrybucie schemaLocation z dokumentu XML.
+     * @param exceptions - kolekcja, w której zostan¹ zwrócone b³êdy.
+     * @return - true jeœli dokument przechodzi poprawnie walidacjê.
      */
     public static <T> boolean validate(T dsml, String xsdFileName, List<SAXParseException> exceptions) {          
         try {

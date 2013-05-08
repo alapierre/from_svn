@@ -29,12 +29,18 @@ public class BaseXMLSerializer<T> {
     private JAXBContext jc;
     private SchemaFactory sf;
     private Schema schema;
+    private boolean noNameSpace;
     Logger logger = Logger.getLogger(getClass());
     
     public String schemaLoaction;//= "http://www.uke.gov.pl/euro http://schema.softproject.com.pl/uke/uke-euro.xsd";
 
     public BaseXMLSerializer(String contextPath, String xsdFileName, String schemaLocation) {
+        this(contextPath, xsdFileName, schemaLocation, false);
+    }
+    
+    public BaseXMLSerializer(String contextPath, String xsdFileName, String schemaLocation, boolean noNameSpace) {
         this.schemaLoaction = schemaLocation;
+        this.noNameSpace = noNameSpace;
         
         try {
             jc = JAXBContext.newInstance(contextPath);
@@ -151,7 +157,10 @@ public class BaseXMLSerializer<T> {
         try {
             Marshaller marshaller = jc.createMarshaller();        
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
-            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
+            
+            if(noNameSpace) marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, schemaLoaction); 
+            else  marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction); 
+            
             if(validate)
                 marshaller.setSchema(schema);
             out = new FileOutputStream(fileName);
@@ -177,8 +186,11 @@ public class BaseXMLSerializer<T> {
         try {
             Marshaller marshaller = jc.createMarshaller();        
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
-            marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);  
-            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding); 
+            
+            if(noNameSpace) marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, schemaLoaction); 
+            else  marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
+            
             if(validate)
                 marshaller.setSchema(schema);
             out = new FileOutputStream(fileName);
@@ -202,7 +214,10 @@ public class BaseXMLSerializer<T> {
             Marshaller marshaller = jc.createMarshaller();        
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
+            
+            if(noNameSpace) marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, schemaLoaction); 
+            else  marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLoaction);
+            
             if(validate)
                 marshaller.setSchema(schema);
             StringWriter sw = new StringWriter();          

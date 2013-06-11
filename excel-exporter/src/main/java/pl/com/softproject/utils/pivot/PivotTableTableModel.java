@@ -5,6 +5,7 @@ package pl.com.softproject.utils.pivot;
 
 import java.util.*;
 import javax.swing.table.AbstractTableModel;
+import org.apache.log4j.Logger;
 import pl.com.softproject.utils.pivot.PivotTableModelImpl.RowIterator;
 
 /**
@@ -14,6 +15,7 @@ import pl.com.softproject.utils.pivot.PivotTableModelImpl.RowIterator;
 public class PivotTableTableModel<T> extends AbstractTableModel {
 
     protected PivotTableModel pivot = new PivotTableModelImpl();
+    private Logger logger = Logger.getLogger(getClass());
     
     protected Object[][] dataTab;
     protected String columnNames[];
@@ -90,7 +92,13 @@ public class PivotTableTableModel<T> extends AbstractTableModel {
 
     @Override
     public T getValueAt(int rowIndex, int columnIndex) {
-        return (T)dataTab[rowIndex][columnIndex];
+        
+        if(columnIndex < dataTab[rowIndex].length) {
+            logger.debug("out of columnIndex ");
+            return (T)dataTab[rowIndex][columnIndex];
+        } else return null;
+        
+        
     }
 
     @Override

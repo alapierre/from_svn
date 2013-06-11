@@ -94,7 +94,7 @@ public class PivotTableTableModel<T> extends AbstractTableModel {
     public T getValueAt(int rowIndex, int columnIndex) {
         
         if(columnIndex < dataTab[rowIndex].length) {
-            logger.debug("out of columnIndex ");
+            
             return (T)dataTab[rowIndex][columnIndex];
         } else return null;
         

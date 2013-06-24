@@ -43,7 +43,7 @@ public class PivotTableTableModel<T> extends AbstractTableModel {
     public void removeColumn(String columnKey) {
         pivot.removeColumn(columnKey);
     }   
-    
+      
     public boolean containsColumnName(String columnName) {
         if (columnNames != null) {
             List<String> list = Arrays.asList(columnNames);
@@ -53,14 +53,18 @@ public class PivotTableTableModel<T> extends AbstractTableModel {
         return false;
     }
     
+    public void removeRow(String rowKey) {
+        pivot.removeRow(rowKey);
+    }
+    
     public void prepareForTabe() {
        
         Set<String> columns = pivot.getColumnNames();
                 
         columnNames = columns.toArray(new String[0]);
-      
-        columnCount = columnNames.length + 1;
 
+        columnCount = columnNames.length + 1;
+        
         rowNames = pivot.getRowNames().toArray(new String[0]);
         rowCount = rowNames.length;
 
@@ -72,7 +76,7 @@ public class PivotTableTableModel<T> extends AbstractTableModel {
 
         while (rows.hasNext()) {
             Map<String, Object> pivotRow = rows.next();
-
+            
             List<Object> tmp = new LinkedList<Object>(pivotRow.values());
             tmp.add(0, rowNames[rownum]);
             dataTab[rownum++] = tmp.toArray();            
@@ -96,9 +100,7 @@ public class PivotTableTableModel<T> extends AbstractTableModel {
         if(columnIndex < dataTab[rowIndex].length) {
             
             return (T)dataTab[rowIndex][columnIndex];
-        } else return null;
-        
-        
+        } else return null;       
     }
 
     @Override

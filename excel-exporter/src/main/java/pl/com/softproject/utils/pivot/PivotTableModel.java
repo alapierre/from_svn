@@ -21,7 +21,9 @@ public interface PivotTableModel {
     void addColumn(String columnKey, Object value) throws Exception;
     
     void addColumn(String columnKey, Map<String, Object> rowKeyToColumnValueMap);
-         
+      
+    void removeRow(String rowKey);
+    
     void removeColumn(String columnKey);
     
     Iterator iterator();

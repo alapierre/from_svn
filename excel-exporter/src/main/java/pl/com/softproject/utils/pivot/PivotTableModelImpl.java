@@ -19,7 +19,7 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
     public void add(String rowKey, String columnKey, Object value) {
         Map<String, Object> row = map.get(rowKey);
         if(row == null) {
-            row = new LinkedHashMap<String, Object>();
+            row = new LinkedHashMap<String, Object>();    
             row.put(columnKey, value);
             map.put(rowKey, row);
         } else {
@@ -82,6 +82,20 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
             }        
         }
     }
+    
+    @Override
+    public void removeRow(String rowKey) {
+        RowIterator iter = (RowIterator)iterator();        
+        while (iter.hasNext()) {  
+            iter.next();
+            
+            String currentRowKey = iter.rowKey();            
+            if (rowKey.equals(currentRowKey)) {
+                
+                iter.remove();
+            }
+        }
+    }
         
     @Override
     public Iterator  iterator() {
@@ -111,11 +125,11 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
         
         for(Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
             //columns.addAll(entry.getValue().keySet());
-            Map<String, Object> m = entry.getValue();
+            Map<String, Object> m = entry.getValue();       
             for (Map.Entry<String, Object> e : m.entrySet()) {
-                columns.add(e.getKey());
+                columns.add(e.getKey());                
             }            
-        }
+        }        
         return columns;
     }
     

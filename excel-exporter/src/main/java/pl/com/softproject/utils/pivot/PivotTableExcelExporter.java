@@ -69,9 +69,25 @@ public class PivotTableExcelExporter {
             cell.setCellValue(rowKey);
             short cellnum = 1;
             for (String column : columns) {
-                cell = row.createCell(cellnum++);
-                Number number = (Number) pivotRow.get(column);
-                cell.setCellValue(number != null ? number.doubleValue() : 0);
+                cell = row.createCell(cellnum++);                
+                Object cellValue = pivotRow.get(column);
+                
+                if (cellValue instanceof Number) {
+                    
+                    Number number = (Number) cellValue;
+                    cell.setCellValue(number.doubleValue());                    
+                } else if (cellValue instanceof String) {                    
+                    
+                    String result = (String) cellValue;
+                    cell.setCellValue(result);                    
+                } else {
+                    
+                    if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                        cell.setCellValue(0);
+                    } else {
+                        cell.setCellValue("");
+                    }
+                }
             }
             if(addSumarryColumn) {
                 addSumarryColumn(cellnum, rownum, row);

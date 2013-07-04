@@ -62,8 +62,12 @@ public class PivotTableTableModel<T> extends AbstractTableModel {
         Set<String> columns = pivot.getColumnNames();
                 
         columnNames = columns.toArray(new String[0]);
-
-        columnCount = columnNames.length + 1;
+        
+        if (columnNames.length > 0) {            
+            columnCount = columnNames.length + 1;
+        } else {//to znaczy ze pivot nie ma rekordow         
+            columnCount = columnNames.length;
+        }
         
         rowNames = pivot.getRowNames().toArray(new String[0]);
         rowCount = rowNames.length;

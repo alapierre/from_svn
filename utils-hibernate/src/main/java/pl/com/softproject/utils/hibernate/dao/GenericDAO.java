@@ -51,6 +51,8 @@ public interface GenericDAO <T, PK extends Serializable> {
      */
     public List<T> searchAllOrdered(String sortProperity, boolean ascending);
     
+    public List<T> searchAllOrdered(final String sortProperity, final boolean ascending, final boolean distinct);
+    
     /**
      * Wyszukuje encje wed³ug podanego przyk³adu. Wszystkie w³aœciwoœci, ró¿ne od null i 0 
      * bêd¹ brane pod uwagê. Do porównywania stringów u¿ywany jest operator like, wielkoœæ znaków

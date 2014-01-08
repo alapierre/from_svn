@@ -15,6 +15,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.type.Type;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -135,6 +136,30 @@ public class GenericDAOHibernateImpl<T, PK extends Serializable> extends Hiberna
             }
         });
     }
+    
+   @SuppressWarnings("unchecked")
+    public List<T> searchAllOrdered(final String sortProperity, final boolean ascending, final boolean distinct) {
+        return getHibernateTemplate().executeFind(new HibernateCallback() {
+            public Object doInHibernate(Session session) throws HibernateException, SQLException {
+
+                Criteria criteria = getSession()
+                        .createCriteria(type);
+
+                if(distinct) {
+                    criteria.setProjection(Projections.distinct(Projections.property(sortProperity)));
+                }
+                
+                if (sortProperity != null && !"".equals(sortProperity)) {
+                    if (ascending == true) {
+                        criteria.addOrder(Order.asc(sortProperity));
+                    } else {
+                        criteria.addOrder(Order.desc(sortProperity));
+                    }
+                }
+                return criteria.list();
+            }
+        });
+    } 
 
     @SuppressWarnings("unchecked")
     protected List<T> executeExampleQuery(final Example example) {

@@ -21,5 +21,7 @@ public interface FinderExecutor<T>
 
 //    ScrollableResults scrollFinder(Method method, Object[] queryArgs);
 
+    List<T> searchAllOrdered(final String sortProperity, final boolean ascending, final boolean distinct);
+
     
 }

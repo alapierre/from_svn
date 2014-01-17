@@ -5,6 +5,7 @@ package pl.com.softproject.utils.commons.http;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -62,6 +63,28 @@ public class AbstractCommonsHttpService implements InitializingBean, DisposableB
                 throw new IOException("Nie otrzymano odpowiedzi z serwisu");
             }
          
+    }
+    
+    protected byte[] invokeRemoteServiceAndReturnResultAsByteArray(String serviceNameAndParam) throws MalformedURLException, URISyntaxException, IOException {
+        
+            URL source = new URL(serviceURL + serviceNameAndParam);
+            HttpEntity entity = getHttpEntity(source);
+            if (entity != null) {
+                return EntityUtils.toByteArray(entity);
+            } else {
+                throw new IOException("Nie otrzymano odpowiedzi z serwisu");
+            }
+    }
+    
+    protected InputStream invokeRemoteServiceAndReturnResultAsStream(String serviceNameAndParam) throws MalformedURLException, URISyntaxException, IOException {
+        
+            URL source = new URL(serviceURL + serviceNameAndParam);
+            HttpEntity entity = getHttpEntity(source);
+            if (entity != null) {
+                return entity.getContent();
+            } else {
+                throw new IOException("Nie otrzymano odpowiedzi z serwisu");
+            }
     }
 
     protected HttpEntity getHttpEntity(URL source) throws URISyntaxException, IOException {

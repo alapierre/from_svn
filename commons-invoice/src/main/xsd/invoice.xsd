@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Adrian Lapierre (SoftProject) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.softproject.com.pl/commons/model/invoice" 
+           targetNamespace="http://www.softproject.com.pl/commons/model/invoice">
+	<xs:element name="invoice">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="seller" type="xs:string"/>
+				<xs:element name="buyer" type="xs:string"/>
+				<xs:element name="place-of-issue" type="xs:string"/>
+				<xs:element name="issue-date" type="xs:date"/>
+				<xs:element name="sell-date" type="xs:date"/>
+				<xs:element name="invoice-number" type="xs:string"/>
+				<xs:element name="items">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="item" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="no" type="xs:int"/>
+										<xs:element name="code" type="xs:string"/>
+										<xs:element name="name" type="xs:string"/>
+										<xs:element name="foreign-name" type="xs:string" minOccurs="0"/>
+										<xs:element name="qty" type="xs:double"/>
+										<xs:element name="unit-name" type="xs:string"/>
+										<xs:element name="foreign-unit-name" type="xs:string" minOccurs="0"/>
+										<xs:element name="currency" type="currencyType"/>
+										<xs:element name="foreign-curency" type="currencyType" minOccurs="0"/>
+										<xs:element name="net-value" type="xs:double"/>
+										<xs:element name="foreign-net-value" type="xs:double" minOccurs="0"/>
+										<xs:element name="vat-rate" type="xs:double"/>
+										<xs:element name="net-amount" type="xs:double"/>
+										<xs:element name="foreign-net-amount" type="xs:double" minOccurs="0"/>
+										<xs:element name="vat-amount" type="xs:double"/>
+										<xs:element name="gross-amount" type="xs:double"/>
+										<xs:element name="foreign-gross-amount" type="xs:double" minOccurs="0"/>
+										<xs:element name="weight" type="xs:double" minOccurs="0"/>
+										<xs:element name="item-group-name" type="xs:string" minOccurs="0"/>
+										<xs:element name="item-group-id" type="xs:int" minOccurs="0"/>
+										<xs:element name="foreign-vat-amount" type="xs:double" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="summary">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="total-amount" type="xs:double"/>
+							<xs:element name="currency" type="currencyType"/>
+							<xs:element name="foreign-currency" type="currencyType" minOccurs="0"/>
+							<xs:element name="currency-rate" type="xs:double" minOccurs="0"/>
+							<xs:element name="total-amount-in-words" type="xs:string"/>
+							<xs:element name="left-to-pay" type="xs:double"/>
+							<xs:element name="payment-date" type="xs:date"/>
+							<xs:element name="days-to-pay" type="xs:int"/>
+							<xs:element name="signer" type="xs:string"/>
+							<xs:element name="net-value" type="xs:double"/>
+							<xs:element name="foreign-net-value" type="xs:double" minOccurs="0"/>
+							<xs:element name="tax-value" type="xs:double"/>
+							<xs:element name="foreign-tax-value" type="xs:double" minOccurs="0"/>
+							<xs:element name="gross-value" type="xs:double"/>
+							<xs:element name="foreign-gross-value" type="xs:double" minOccurs="0"/>
+							<xs:element name="tax-rate" type="xs:double" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="grouping" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="item-group" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="id" type="xs:int" use="required"/>
+									<xs:attribute name="name" type="xs:string" use="required"/>
+									<xs:attribute name="qty" type="xs:double" use="required"/>
+									<xs:attribute name="unit-name" type="xs:string" use="required"/>
+									<xs:attribute name="weight" type="xs:double" use="required"/>
+									<xs:attribute name="currency" type="xs:string" use="required"/>
+									<xs:attribute name="net-amount" type="xs:double" use="required"/>
+									<xs:attribute name="vat-rate" type="xs:double" use="required"/>
+									<xs:attribute name="gross-amount" type="xs:double" use="required"/>
+									<xs:attribute name="no" type="xs:int"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="currencyType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EUR"/>
+			<xs:enumeration value="PLN"/>
+			<xs:enumeration value="USD"/>
+			<xs:enumeration value="GBP"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

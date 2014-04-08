@@ -89,6 +89,7 @@
         <module>swing-extentions</module>
     <module>commons-http</module>
     <module>commons-invoice</module>
+    <module>utils-sitemap</module>
   </modules>
 
     <!--pluginRepositories>

@@ -3,6 +3,7 @@
  */
 package pl.com.softproject.utils.xml;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -78,4 +79,13 @@ public class DataTools {
         return calendar.getTime();
     }
     
+    public static String formatDateWithTime(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-ddThh:mm:ssTZD");
+        return df.format(date);
+    }
+    
+    public static String formatDate(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(date);
+    }
 }

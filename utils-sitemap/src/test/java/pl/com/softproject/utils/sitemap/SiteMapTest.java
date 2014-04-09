@@ -17,12 +17,39 @@ import org.sitemaps.schemas.sitemap._0.Urlset;
 public class SiteMapTest {
     
     @Test
+    public void testBaseURLwithNull() {
+    
+        SitemapUtil sitemap = new SitemapUtil(null);
+        
+        sitemap.addUrl("http://www.example.com/", new Date(), TChangeFreq.DAILY)
+                .addUrl("http://www.example.com/home.htm", new Date(), TChangeFreq.HOURLY);
+        
+        System.out.println(sitemap);
+    }
+    
+    @Test
+    public void testBaseURLwithSlash() {
+        
+        SitemapUtil sitemap = new SitemapUtil("http://www.example.com/");
+        assert sitemap.getBaseURL().endsWith("/");
+        
+    }
+    
+    @Test
+    public void testBaseURLwithoutSlash() {
+        
+        SitemapUtil sitemap = new SitemapUtil("http://www.example.com");
+        assert sitemap.getBaseURL().endsWith("/");
+        
+    }
+    
+    @Test
     public void testUtil() {
         
-        SitemapUtil sitemap = new SitemapUtil();
+        SitemapUtil sitemap = new SitemapUtil("http://www.example.com");
         
-        sitemap.addUrl("www.example.com", new Date(), TChangeFreq.DAILY)
-                .addUrl("sample.example.com", new Date(), TChangeFreq.HOURLY);
+        sitemap.addUrl("", new Date(), TChangeFreq.DAILY)
+                .addUrl("home.htm", new Date(), TChangeFreq.HOURLY);
         
         System.out.println(sitemap);
         

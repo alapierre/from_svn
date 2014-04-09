@@ -80,7 +80,7 @@ public class DataTools {
     }
     
     public static String formatDateWithTime(Date date) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-ddThh:mm:ssTZD");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sXXX");
         return df.format(date);
     }
     

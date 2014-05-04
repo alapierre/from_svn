@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
+import pl.com.softproject.utils.excelexporter.ExcelCellRenderer;
 
 /**
  *
@@ -25,6 +26,7 @@ public class PivotTableExcelExporter {
 
     private Workbook wb;
     private boolean addSumarryColumn;
+    private ExcelCellRenderer renderer;
 
     public PivotTableExcelExporter() {
     }
@@ -72,6 +74,9 @@ public class PivotTableExcelExporter {
                 cell = row.createCell(cellnum++);                
                 Object cellValue = pivotRow.get(column);
                 
+                if(renderer != null)
+                    renderer.render(cell, cellValue);
+                
                 if (cellValue instanceof Number) {
                     
                     Number number = (Number) cellValue;
@@ -95,13 +100,16 @@ public class PivotTableExcelExporter {
 
         }
 
-//        for (Row sumRow : sheet) {
-//            Cell sumCell = sumRow.createCell(8);
-//            sumCell.setCellFormula(String.format("SUM(B%s:H%s)", sumRow.getRowNum() + 1, sumRow.getRowNum() + 1));
-//
-//            //cell.setCellFormula("SUM(F1:H1)+B1");
-//        }
-
+        autoSizeColumn(sheet, 0);        
+    }
+    
+    public void autoSizeColumn(Sheet sheet, int colIndex) {
+        sheet.autoSizeColumn(colIndex);
+    }
+    
+    public void autoSizeColumn(String seetName, int colIndex) {
+        Sheet sheet = wb.getSheet(seetName);
+        autoSizeColumn(sheet, colIndex);
     }
 
     public void saveWorkbook(File file) throws FileNotFoundException, IOException {
@@ -148,6 +156,10 @@ public class PivotTableExcelExporter {
         cellReference.formatAsString();
         String formula = "sum(" + startCellReference.formatAsString() + ":" + cellReference.formatAsString() + ")";
         cell.setCellFormula(formula);
+    }
+
+    public void setRenderer(ExcelCellRenderer renderer) {
+        this.renderer = renderer;
     }
 
 }

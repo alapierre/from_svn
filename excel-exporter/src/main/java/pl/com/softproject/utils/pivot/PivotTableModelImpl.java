@@ -32,7 +32,12 @@ public class PivotTableModelImpl implements Iterable<Map<String, Object>>, Pivot
         map.put(rowKey, rowValue);
     }
     
-    /**Metoda do wypełniania całej kolumny jedną wartością**/
+    /**
+     * Metoda do wypełniania całej kolumny jedną wartością
+     * @param columnKey
+     * @param columnValue
+     * @throws java.lang.Exception
+     **/
     @Override
     public void addColumn(String columnKey, Object columnValue) throws Exception {
     
